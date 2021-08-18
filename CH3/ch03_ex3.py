@@ -4,11 +4,16 @@
 Chapter 3, Example Set 4
 """
 ###########################################
-# Generator expressions
+# Imports
 ###########################################
 
 import math
-from typing import Iterator
+import itertools
+from typing import Iterable, Iterator, Any
+
+###########################################
+# Generator expressions
+###########################################
 
 # Locate the prime factors of a number using generators and for loops
 
@@ -71,9 +76,6 @@ def calc_factors_recursive(x: int) -> Iterator[int]:
 ###########################################
 # Generator limitations
 ###########################################
-
-import itertools
-from typing import Iterable, Any
 
 # Generators don't have a proper value until we consume the generator functions
 
