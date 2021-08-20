@@ -27,7 +27,7 @@ def g(x):
 
 g_f_x = (
     g(f(x)) 
-    for x in range()
+    for x in range(10)
     )
 
 # -------------------------
@@ -38,7 +38,7 @@ g_f_x = (
     g(y) 
     for y in (
         f(x) 
-        for x in range()
+        for x in range(10)
         )
     )
 
@@ -48,7 +48,7 @@ g_f_x = (
 
 f_x= (
     f(x) 
-    for x in range()
+    for x in range(10)
     )
 
 g_f_x= (
