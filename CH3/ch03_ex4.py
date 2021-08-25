@@ -9,7 +9,6 @@ Chapter 3, Example Set 5
 
 import csv
 from collections import namedtuple
-from typing import TextIO, Iterator, List, Text, NamedTuple
 
 ###########################################
 # Combining generator expressions
