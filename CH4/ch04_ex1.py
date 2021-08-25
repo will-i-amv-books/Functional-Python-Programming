@@ -12,38 +12,16 @@ Chapter 4, Example Set 1
 import xml.etree.ElementTree as XML
 from urllib.request import urlopen
 from math import radians, sin, cos, sqrt, asin
-from typing import Text, List, TextIO, Tuple, Any, \
-    Iterator, TypeVar, Callable, Iterable
-
-###########################################
-# Types
-###########################################
-
-Rows = Iterable[List[Text]]
-LL_Text = Tuple[Text, Text]
-Item_Iter = Iterator[Any]
-
-T_ = TypeVar('T_')
-Pairs_Iter = Iterator[Tuple[T_, T_]]
-
-Leg = Tuple[Tuple[float, float], Tuple[float, float]]
-Leg_call = Callable[[Tuple[float, float], Tuple[float, float]], bool]
-Leg_Iter = Iterable[Leg]
-
-Text_Iter = Iterable[Tuple[Text, Text]]
-LL_Iter = Iterable[Tuple[float, float]]
-
-Point = Tuple[float, float]
 
 ###########################################
 # Parsing an XML file
 ###########################################
 
-def split_by_comma(text: Text) -> List[Text]:
+def split_by_comma(text):
     return text.split(",")
 
 
-def read_rows_kml(fileHandler: TextIO) -> Iterable[List[Text]]:
+def read_rows_kml(fileHandler):
     namespaceDict = {
         "ns0": "http://www.opengis.net/kml/2.2",
         "ns1": "http://www.google.com/kml/ext/2.2"
@@ -62,11 +40,11 @@ with open('../Winter 2012-2013.kml') as fh:
 # Parsing a file at a higher level
 ###########################################
 
-def invert_coordinate(lon: Text, lat: Text, alt: Text) -> Tuple[Text, Text]:
+def invert_coordinate(lon, lat, alt):
     return lat, lon
 
 
-def invert_coordinates(rows: Rows) -> Iterable[LL_Text]:
+def invert_coordinates(rows):
     """
     >>> data= [['-76.33029518659048', '37.54901619777347', '0']]
     >>> list(lat_lon_kml( data ))
@@ -91,14 +69,14 @@ with urlopen("file:../Winter%202012-2013.kml") as fh:
 # Create pairs using generators and recursion
 
 #pairs()
-def create_pairs_recursive(lat_lon_iterable: Item_Iter) -> Pairs_Iter:
+def create_pairs_recursive(lat_lon_iterable):
     """Yields list[0:1], list[1:2], list[2:3], ..., list[n-2,n-1]
 
     >>> trip = iter([(0,0), (1,0), (1,1), (0,1), (0,0)])
     >>> list(create_pairs_recursive(trip))
     [((0, 0), (1, 0)), ((1, 0), (1, 1)), ((1, 1), (0, 1)), ((0, 1), (0, 0))]
     """
-    def create_pair(head: Any, iterable_tail: Item_Iter) -> Pairs_Iter:
+    def create_pair(head, iterable_tail):
         next_ = next(iterable_tail)
         yield head, next_
         yield from create_pair(next_, iterable_tail)
@@ -110,7 +88,7 @@ def create_pairs_recursive(lat_lon_iterable: Item_Iter) -> Pairs_Iter:
 # Create pairs using only generators
 
 #legs()
-def create_pairs_iterative(lat_lon_iterable: Iterator[T_]) -> Pairs_Iter:
+def create_pairs_iterative(lat_lon_iterable):
     """Yields list[0:1], list[1:2], list[2:3], ..., list[n-2,n-1]
     Another option is zip( list[0::2], list[1::2] )
 
@@ -137,7 +115,7 @@ with urlopen("file:../Winter%202012-2013.kml") as fh:
 
 # Using a filter function within a generator function
 
-def filter_pairs(lat_lon_iterable: Pairs_Iter, rejection_rule: Leg_call) -> Leg_Iter:
+def filter_pairs(lat_lon_iterable, rejection_rule):
     """
     >>> trip = iter([(0,0), (1,0), (2,0), (2,1), (2,2), (0,1), (0,0)])
     >>> some_rule = lambda b, e: b[0] == 0
@@ -154,7 +132,7 @@ def filter_pairs(lat_lon_iterable: Pairs_Iter, rejection_rule: Leg_call) -> Leg_
 
 # Using a map function within a generator function
 
-def convert_to_float(lat_lon_iterable: Text_Iter) -> LL_Iter:
+def convert_to_float(lat_lon_iterable):
     """Create float lat-lon pairs from string lat-lon pairs.
 
     >>> trip = [("1", "2"), ("2.718", "3.142")]
@@ -182,7 +160,7 @@ MI = 3959
 NM = 3440
 KM = 6371
 
-def calc_haversine(point1: Point, point2: Point, R: float=NM) -> float:
+def calc_haversine(point1, point2, R=NM):
     """The great-circle distance between 2 points on a sphere 
     given their longitudes and latitudes.
     * point1 and point2 are two-tuples of latitude and longitude.
@@ -202,7 +180,7 @@ def calc_haversine(point1: Point, point2: Point, R: float=NM) -> float:
     return R * c
 
 
-def calc_haversines(pairs_iterable: Pairs_Iter) -> Tuple[Pairs_Iter, float]:
+def calc_haversines(pairs_iterable):
     return (
         (start, end, round(calc_haversine(start, end), 4))
         for start, end in pairs_iterable
