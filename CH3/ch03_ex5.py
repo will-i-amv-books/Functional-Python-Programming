@@ -12,7 +12,6 @@ Chapter 3, Example Set 6
 from bisect import bisect_left
 from collections import namedtuple
 from collections.abc import Mapping
-from typing import Iterable, Tuple, NamedTuple, Dict, Any
 
 ###########################################
 # Using stateful mappings(dicts)
@@ -32,8 +31,8 @@ Columns: 3
 
 # Resulting object from parsing the 'example' string
 
-Color: NamedTuple = namedtuple("Color", ("red", "green", "blue", "name"))
-colorsTuple: Tuple[NamedTuple] = (
+Color = namedtuple("Color", ("red", "green", "blue", "name"))
+colorsTuple = (
     Color(red=239, green=222, blue=205, name='Almond'),
     Color(red=205, green=149, blue=117, name='Antique Brass'),
     Color(red=253, green=217, blue=181, name='Apricot'),
@@ -43,7 +42,7 @@ colorsTuple: Tuple[NamedTuple] = (
 
 # Transforming the namedtple to a dict
 
-def convert_to_dict(sequence: Tuple[NamedTuple]) -> Dict[str, NamedTuple]:
+def convert_to_dict(sequence):
     return dict(
         (color.name, color)
         for color in sequence
@@ -61,7 +60,7 @@ colorsDict = convert_to_dict(colorsTuple)
 # -------------------------
 
 class StaticMapping(Mapping):
-    def __init__(self, iterable: Iterable[Tuple[Any, Any]]) -> None:
+    def __init__(self, iterable):
         self._data = tuple(iterable)
         self._keys = tuple(sorted(key for key, _ in self._data))
     
