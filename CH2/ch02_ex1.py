@@ -65,8 +65,8 @@ def numbers():
         yield i
 
 
-def sum_to(number: int) -> int:
-    results: int = 0
+def sum_to(number):
+    results = 0
     for i in numbers():
         if i == number:
             break
@@ -88,7 +88,7 @@ import math
 
 # Imperative version
 
-def isprime_imperative(number: int) -> bool:
+def isprime_imperative(number):
     """Is number prime?
 
     >>> isprime_imperative(2)
@@ -107,7 +107,7 @@ def isprime_imperative(number: int) -> bool:
 # Recursive version with tail-call optimization
 # (breaks for a recursion limit of 1000)
 
-def isprime_recursive(number: int) -> bool:
+def isprime_recursive(number):
     """Is number prime?
 
     >>> isprime_recursive(2)
@@ -115,7 +115,7 @@ def isprime_recursive(number: int) -> bool:
     >>> tuple( isprime_recursive(x) for x in range(3,11) )
     (True, False, True, False, True, False, False, False)
     """
-    def isprime(k: int, coprime: int) -> bool:
+    def isprime(k, coprime):
         """Is k relatively prime to the value coprime?"""
         if k < coprime*coprime:
             return True
@@ -129,7 +129,7 @@ def isprime_recursive(number: int) -> bool:
 
 # Using generators with lazy evaluation
 
-def isprime_generator_lazy(number: int) -> bool:
+def isprime_generator_lazy(number):
     """Is number prime?
 
     >>> isprime_generator(2)
@@ -149,7 +149,7 @@ def isprime_generator_lazy(number: int) -> bool:
 
 # Using generators with strict evaluation
 
-def isprime_generator_strict(number: int) -> bool:
+def isprime_generator_strict(number):
     """Is number prime?
 
     >>> isprime_generator(2)
