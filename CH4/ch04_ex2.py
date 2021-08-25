@@ -21,13 +21,12 @@ http://en.wikipedia.org/wiki/Simple_linear_regression
 ###########################################
 
 from math import sqrt
-from collections import Sequence
 
 ###########################################
 # Using any() and all() as reductions
 ###########################################
 
-def isprime(number: int) -> bool:
+def isprime(number):
     if number < 2: return False
     if number == 2: return True
     if number % 2 == 0: return False
@@ -52,18 +51,18 @@ areThereNonprimes = any(not isprime(int(x)) for x in primes)
 
 # Basic sum functions
 
-def s0(samples: Sequence) -> float:
+def s0(samples):
     return len(samples)  # sum(x**0 for x in samples)
 
-def s1(samples: Sequence) -> float:
+def s1(samples):
     return sum(samples)  # sum(x**1 for x in samples)
 
-def s2(samples: Sequence) -> float:
+def s2(samples):
     return sum(x**2 for x in samples)
 
 # Basic statistical functions
 
-def calc_mean(samples: Sequence) -> float:
+def calc_mean(samples):
     """Arithmetic mean.
 
     >>> d = [4, 36, 45, 50, 75]
@@ -73,7 +72,7 @@ def calc_mean(samples: Sequence) -> float:
     return s1(samples)/s0(samples)
 
 
-def calc_stdev(samples: Sequence) -> float:
+def calc_stdev(samples):
     """Standard deviation.
 
     >>> d = [ 2, 4, 4, 4, 5, 5, 7, 9 ]
@@ -86,7 +85,7 @@ def calc_stdev(samples: Sequence) -> float:
     return sqrt((s2(samples)/N) - (s1(samples)/N)**2)
 
 
-def calc_normalized_score(x: float, mean_x: float, stdev_x: float) -> float:
+def calc_normalized_score(x, mean_x, stdev_x):
     """
     Compute a normalized score (Z).
 
@@ -103,7 +102,7 @@ def calc_normalized_score(x: float, mean_x: float, stdev_x: float) -> float:
     return (x - mean_x) / stdev_x
 
 
-def calc_correlation(samples1: Sequence, samples2: Sequence) -> float:
+def calc_correlation(samples1, samples2):
     """Pearson product-moment correlation.
 
     >>> xi= [1.47, 1.50, 1.52, 1.55, 1.57, 1.60, 1.63, 1.65,
