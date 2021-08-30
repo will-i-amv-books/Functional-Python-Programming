@@ -17,7 +17,7 @@ from typing import Iterable, Iterator, Any
 
 # Locate the prime factors of a number using generators and for loops
 
-def calc_factors_iterative(x: int) -> Iterator[int]:
+def calc_factors_iterative(x):
     """Loop/Recursion factors. Limited to numbers with 1,000 factors.
 
     >>> list(calc_factors_iterative(1560))
@@ -44,7 +44,7 @@ def calc_factors_iterative(x: int) -> Iterator[int]:
 
 # Locate the prime factors of a number using pure recursion
 
-def calc_factors_recursive(x: int) -> Iterator[int]:
+def calc_factors_recursive(x):
     """Pure Recursion factors. Limited to numbers below about 4,000,000
 
     >>> list(calc_factors_recursive(1560))
@@ -54,7 +54,7 @@ def calc_factors_recursive(x: int) -> Iterator[int]:
     >>> list(calc_factors_recursive(3))
     [3]
     """
-    def factor_n(x: int, n: int) -> Iterator[int]:
+    def factor_n(x, n):
         if n*n > x:
             yield x
             return
@@ -95,7 +95,7 @@ sum(result) # Will show 0
 
 # Using itertools.tee() to clone a generator 2 or more times
 
-def calc_extreme_values(iterable: Iterable[Any]) -> Any:
+def calc_extreme_values(iterable):
     """
     >>> calc_extreme_values([1, 2, 3, 4, 5])
     (5, 1)

@@ -9,7 +9,6 @@ Chapter 3, Example Set 5
 
 import csv
 from collections import namedtuple
-from typing import TextIO, Iterator, List, Text, NamedTuple
 
 ###########################################
 # Combining generator expressions
@@ -61,7 +60,7 @@ g_f_x= (
 ###########################################
 # pylint: disable=line-too-long,wrong-import-position
 
-def read_rows(fileHandler: TextIO) -> Iterator[List[Text]]:
+def read_rows(fileHandler):
     """Read a CSV file and emit a sequence of rows.
 
     >>> import io
@@ -72,7 +71,7 @@ def read_rows(fileHandler: TextIO) -> Iterator[List[Text]]:
     return csv.reader(fileHandler, delimiter="\t")
 
 
-def remove_headings(rows: Iterator[List[Text]]) -> Iterator[List[Text]]:
+def remove_headings(rows):
     """Removing a fixed sequence of headers.
 
     >>> rows= [
@@ -104,10 +103,10 @@ with open("../Anscombe.txt") as fh:
 # Using namedtuples
 ###########################################
 
-Pair: NamedTuple = namedtuple("Pair", ("x", "y"))
+Pair = namedtuple("Pair", ("x", "y"))
 
 
-def create_pairs(n: int, rows: Iterator[List[Text]]) -> Iterator[NamedTuple]:
+def create_pairs(n, rows):
     """Turn one of the given Anscombe's pairs into two-tuple objects.
 
     >>> rows = [[1,2, 3,4, 5,6, 7,8],[9,10, 11,12, 13,14, 15,16]]
